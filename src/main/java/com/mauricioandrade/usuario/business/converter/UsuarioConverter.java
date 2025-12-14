@@ -86,9 +86,9 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public Usuario updateUsuario(UsuarioDTO usuarioDTO, Usuario entity){
+    public Usuario updateUsuario(UsuarioDTO usuarioDTO, Usuario entity) {
         return Usuario.builder()
-                .nome(usuarioDTO.getNome()!= null ? usuarioDTO.getNome() : entity.getNome())
+                .nome(usuarioDTO.getNome() != null ? usuarioDTO.getNome() : entity.getNome())
                 .id(entity.getId())
                 .senha(usuarioDTO.getSenha() != null ? usuarioDTO.getSenha() : entity.getSenha())
                 .email(usuarioDTO.getEmail() != null ? usuarioDTO.getEmail() : entity.getEmail())
@@ -98,7 +98,7 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public Endereco updateEndereco (EnderecoDTO enderecoDTO, Endereco entity){
+    public Endereco updateEndereco(EnderecoDTO enderecoDTO, Endereco entity) {
         return Endereco.builder()
                 .id(entity.getId())
                 .rua(enderecoDTO.getRua() != null ? enderecoDTO.getRua() : entity.getRua())
@@ -110,11 +110,31 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public Telefone updateTelefone (TelefoneDTO telefoneDTO, Telefone entity){
+    public Telefone updateTelefone(TelefoneDTO telefoneDTO, Telefone entity) {
         return Telefone.builder()
                 .id(entity.getId())
                 .numero(telefoneDTO.getNumero() != null ? telefoneDTO.getNumero() : entity.getNumero())
                 .ddd(telefoneDTO.getDdd() != null ? telefoneDTO.getDdd() : entity.getDdd())
+                .build();
+    }
+
+    public Endereco paraEnderecoEntity(EnderecoDTO dto, Long idUsuario) {
+        return Endereco.builder()
+                .rua(dto.getRua())
+                .numero(dto.getNumero())
+                .cidade(dto.getCidade())
+                .complemento(dto.getComplemento())
+                .cep(dto.getCep())
+                .estado(dto.getEstado())
+                .usuario_id(idUsuario)
+                .build();
+    }
+
+    public Telefone paraTelefoneEntity(TelefoneDTO dto, Long idUsuario) {
+        return Telefone.builder()
+                .numero(dto.getNumero())
+                .ddd(dto.getDdd())
+                .usuario_id(idUsuario)
                 .build();
     }
 }
